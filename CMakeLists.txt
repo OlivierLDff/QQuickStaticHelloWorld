@@ -34,10 +34,6 @@ target_link_libraries(QQuickStaticHelloWorld
   Qt5::QuickControls2
 )
 
-if(TARGET Qt5::QmlWorkerScript)
-  target_link_libraries(QQuickStaticHelloWorld Qt5::QmlWorkerScript)
-endif()
-
 # Only use static macro if linking with static qt
 get_target_property(QT_TARGET_TYPE Qt5::Core TYPE)
 if(${QT_TARGET_TYPE} STREQUAL "STATIC_LIBRARY")
@@ -59,4 +55,10 @@ if(${QT_TARGET_TYPE} STREQUAL "STATIC_LIBRARY")
     VERBOSE
   )
 
+endif()
+
+# This target needs to be linked after qt_generate_qml_plugin_import call.
+# This is hiding a bug somewhere ...
+if(TARGET Qt5::QmlWorkerScript)
+  target_link_libraries(QQuickStaticHelloWorld Qt5::QmlWorkerScript)
 endif()
