@@ -7,7 +7,7 @@ project(QQuickStaticHelloWorld LANGUAGES CXX)
 find_package(Qt5Core            CONFIG REQUIRED NO_CMAKE_SYSTEM_PATH)
 find_package(Qt5Gui             CONFIG REQUIRED NO_CMAKE_SYSTEM_PATH)
 find_package(Qt5Qml             CONFIG REQUIRED NO_CMAKE_SYSTEM_PATH)
-find_package(Qt5QmlWorkerScript CONFIG REQUIRED NO_CMAKE_SYSTEM_PATH)
+find_package(Qt5QmlWorkerScript CONFIG NO_CMAKE_SYSTEM_PATH)
 find_package(Qt5Quick           CONFIG REQUIRED NO_CMAKE_SYSTEM_PATH)
 find_package(Qt5QuickControls2  CONFIG REQUIRED NO_CMAKE_SYSTEM_PATH)
 find_package(Qt5Svg             CONFIG REQUIRED NO_CMAKE_SYSTEM_PATH)
@@ -30,10 +30,13 @@ target_link_libraries(QQuickStaticHelloWorld
   Qt5::Svg
   Qt5::Xml
   Qt5::Qml
-  Qt5::QmlWorkerScript
   Qt5::Quick
   Qt5::QuickControls2
 )
+
+if(TARGET Qt5::QmlWorkerScript)
+  target_link_libraries(QQuickStaticHelloWorld Qt5::QmlWorkerScript)
+endif()
 
 # Only use static macro if linking with static qt
 get_target_property(QT_TARGET_TYPE Qt5::Core TYPE)
