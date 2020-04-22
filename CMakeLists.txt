@@ -1,7 +1,7 @@
 
 cmake_minimum_required(VERSION 3.14)
 
-project(QQuickStaticHelloWorld LANGUAGES CXX)
+project(QQuickStaticHelloWorld LANGUAGES CXX VERSION 1.0.0)
 
 # Find all required package, if some is missing it will result in error in target_link_libraries
 find_package(Qt5Core            CONFIG REQUIRED NO_CMAKE_SYSTEM_PATH)
@@ -61,4 +61,9 @@ endif()
 # This is hiding a bug somewhere ...
 if(TARGET Qt5::QmlWorkerScript)
   target_link_libraries(QQuickStaticHelloWorld PRIVATE Qt5::QmlWorkerScript)
+endif()
+
+if(${CMAKE_SYSTEM_NAME} STREQUAL "iOS")
+  include(cmake/FetchQtIosCMake.cmake)
+  add_qt_ios_app(QQuickStaticHelloWorld VERBOSE)
 endif()
