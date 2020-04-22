@@ -24,7 +24,7 @@ set_target_properties(QQuickStaticHelloWorld PROPERTIES AUTORCC TRUE)
 set_target_properties(QQuickStaticHelloWorld PROPERTIES AUTOMOC TRUE)
 
 # target_link_libraries and not qt5_use_module because it is deprecated
-target_link_libraries(QQuickStaticHelloWorld
+target_link_libraries(QQuickStaticHelloWorld PRIVATE
   Qt5::Core
   Qt5::Gui
   Qt5::Svg
@@ -60,5 +60,5 @@ endif()
 # This target needs to be linked after qt_generate_qml_plugin_import call.
 # This is hiding a bug somewhere ...
 if(TARGET Qt5::QmlWorkerScript)
-  target_link_libraries(QQuickStaticHelloWorld Qt5::QmlWorkerScript)
+  target_link_libraries(QQuickStaticHelloWorld PRIVATE Qt5::QmlWorkerScript)
 endif()
