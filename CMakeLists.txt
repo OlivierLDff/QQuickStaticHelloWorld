@@ -67,3 +67,8 @@ if(${CMAKE_SYSTEM_NAME} STREQUAL "iOS")
   include(cmake/FetchQtIosCMake.cmake)
   add_qt_ios_app(QQuickStaticHelloWorld VERBOSE)
 endif()
+
+if(${CMAKE_SYSTEM_NAME} STREQUAL "Emscripten")
+  include(cmake/FetchQtWasmCMake.cmake)
+  add_qt_wasm_app(QQuickStaticHelloWorld)
+endif()
