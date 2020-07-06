@@ -4,14 +4,17 @@ cmake_minimum_required(VERSION 3.14)
 project(QQuickStaticHelloWorld LANGUAGES CXX VERSION 1.0.0)
 
 # Find all required package, if some is missing it will result in error in target_link_libraries
-find_package(Qt5Core            CONFIG REQUIRED NO_CMAKE_SYSTEM_PATH)
-find_package(Qt5Gui             CONFIG REQUIRED NO_CMAKE_SYSTEM_PATH)
-find_package(Qt5Qml             CONFIG REQUIRED NO_CMAKE_SYSTEM_PATH)
-find_package(Qt5QmlWorkerScript CONFIG QUIET    NO_CMAKE_SYSTEM_PATH)
-find_package(Qt5Quick           CONFIG REQUIRED NO_CMAKE_SYSTEM_PATH)
-find_package(Qt5QuickControls2  CONFIG REQUIRED NO_CMAKE_SYSTEM_PATH)
-find_package(Qt5Svg             CONFIG REQUIRED NO_CMAKE_SYSTEM_PATH)
-find_package(Qt5Xml             CONFIG REQUIRED NO_CMAKE_SYSTEM_PATH)
+find_package(Qt5 REQUIRED COMPONENTS
+  Core
+  Gui
+  Qml
+  Quick
+  QuickControls2
+  Svg
+  Xml
+  QuickCompiler
+  )
+find_package(Qt5 QUIET COMPONENTS QmlWorkerScript)
 
 add_executable(QQuickStaticHelloWorld src/main.cpp qml/qml.qrc)
 
